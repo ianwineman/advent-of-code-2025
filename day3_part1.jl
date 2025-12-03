@@ -12,12 +12,12 @@ function parse_input(input::String)::Vector{Vector{Int64}}
 	return banks
 end
 
-function maxiumum_joltage(bank::Vector{Int64})
+function maximum_joltage(bank::Vector{Int64})
 	x, i = findmax(bank[1:end-1])
 	y, _ = findmax(bank[i+1:end])
 	return 10 * x + y
 end
 
 banks = parse_input(input)
-joltages = [maxiumum_joltage(b) for b in banks]
+joltages = [maximum_joltage(b) for b in banks]
 sum(joltages)
