@@ -15,7 +15,7 @@ end
 function maxiumum_joltage(bank::Vector{Int64})
 	x, i = findmax(bank[1:end-1])
 	y, _ = findmax(bank[i+1:end])
-	return parse(Int, string(x) * string(y))
+	return 10 * x + y
 end
 
 banks = parse_input(input)
