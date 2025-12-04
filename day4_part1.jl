@@ -28,16 +28,20 @@ function convolution(A)
 	return sum(A .* K)
 end
 
-grid = parse_input(input)
-movable = 0
-
-for i in 2:size(grid)[1]-1
-	for j in 2:size(grid)[2]-1
-		A = grid[i-1:i+1, j-1:j+1]
-		c = convolution(A)
-		if (c < 4) && (A[2, 2] == 1)
-			global movable += 1
+function removable(grid)
+	removable_count = 0
+	for i in 2:size(grid)[1]-1
+		for j in 2:size(grid)[2]-1
+			A = grid[i-1:i+1, j-1:j+1]
+			c = convolution(A)
+			if (c < 4) && (A[2, 2] == 1)
+				removable_count += 1
+			end
 		end
 	end
+	return removable_count
 end
-movable
+	
+
+grid = parse_input(input)
+removed = removable(grid)
