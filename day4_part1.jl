@@ -42,6 +42,5 @@ function removable(grid)
 	return removable_count
 end
 	
-
 grid = parse_input(input)
 removed = removable(grid)
