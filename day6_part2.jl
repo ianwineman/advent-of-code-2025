@@ -21,9 +21,8 @@ function parse_input(input::String)
     push!(cols, nums)
 
     operations = map(s -> getfield(Main,s), Symbol.(split(lines[end])))
-
     return cols, operations
 end
 
-number_cols, operations = parse_input(input2)
+number_cols, operations = parse_input(input)
 sum([reduce(operations[i], number_cols[i]) for i in 1:length(operations)])
