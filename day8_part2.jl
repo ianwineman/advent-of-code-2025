@@ -40,40 +40,37 @@ function distance_matrix(points::Vector{Vector{Int64}})::Matrix{Float64}
 	return Matrix(LowerTriangular(dm))
 end
 
-function connected_boxes(distance_matrix::Matrix{Float64}, connection_count::Int64)
+function iteratively_connect_boxes_into_circuit(distance_matrix::Matrix{Float64}) 
 	dm = distance_matrix
 
 	# let argmin() find non-zero elements by removing 0s
 	dm = dm + Matrix(UpperTriangular(zeros(size(dm)...) .+ maximum(dm)))
 
-	connected_boxes = []
-
-	for _ in 1:connection_count
+	connected_pairs = []
+	argmins = []
+	while true
 		am = Tuple(argmin(dm))
-		push!(connected_boxes, am)
+		push!(argmins, am)
+		push!(connected_pairs, am)
 		dm[am...] = maximum(dm)
-	end
-	return connected_boxes
-end
 
-function find_circuits(connected_pairs)
-	circuits = [[b] for b in unique(vcat(first.(connected_pairs), last.(connected_pairs)))]
-	for (x,y) in connected_pairs
-		i = findfirst(z->x in z, circuits)
-		j = findfirst(z->y in z, circuits)		
-		if i != j
-			circuits[i] = vcat(circuits[i], circuits[j])
-			deleteat!(circuits, j)
+		circuits = [[b] for b in unique(vcat(first.(connected_pairs), last.(connected_pairs)))]
+		for (x,y) in connected_pairs
+			i = findfirst(z->x in z, circuits)
+			j = findfirst(z->y in z, circuits)		
+			if i != j
+				circuits[i] = vcat(circuits[i], circuits[j])
+				deleteat!(circuits, j)
+			end
 		end
-		if length(circuits) == 1
-			return (x,y)
+
+		if length(circuits) == 1 && length(circuits[1]) == size(dm)[1]
+			return argmins[end]
 		end
 	end
-	return (0,0)
 end
 
 junction_boxes = parse_input(input)
 dm = distance_matrix(junction_boxes)
-cbs = connected_boxes(dm, length(junction_boxes)*10)
-i, j = find_circuits(cbs)
+i, j = iteratively_connect_boxes_into_circuit(dm)
 junction_boxes[i][1] * junction_boxes[j][1]
