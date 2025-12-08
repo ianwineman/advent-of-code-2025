@@ -7,4 +7,4 @@
 - `Day 05` [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day5_part1.jl) [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day5_part2.jl)
 - `Day 06` [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day6_part1.jl) [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day6_part2.jl)
 - `Day 07` [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day7_part1.jl) [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day7_part2.jl)
-- `Day 08` [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day8_part1.jl)
+- `Day 08` [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day8_part1.jl) [**\***](https://github.com/ianwineman/advent-of-code-2025/blob/main/day8_part2.jl)
